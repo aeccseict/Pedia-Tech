@@ -1,0 +1,200 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Pedia World - Project Works</title>
+  <meta name="description" content="Submit your project requirements and collaborate with Pedia World">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--====== Favicon ======-->
+  <link rel="shortcut icon" href="assets/images/THMAILE.png" type="image/png">
+
+  <!--====== CSS ======-->
+  <link rel="stylesheet" href="assets/css/animate.css">
+  <link rel="stylesheet" href="assets/css/LineIcons.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/default.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+  <!--====== HEADER ======-->
+  <section class="header_area">
+    <div class="header_navbar">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg">
+          <a class="navbar-brand" href="index.html">
+            <img src="assets/images/THMAILE.png" alt="Logo">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+            <span class="toggler-icon"></span>
+            <span class="toggler-icon"></span>
+            <span class="toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+            <ul id="nav" class="navbar-nav ml-auto">
+              <li class="nav-item"><a href="index.html">Home</a></li>
+              <li class="nav-item"><a href="about.html">About</a></li>
+              <li class="nav-item"><a href="service.html">Services</a></li>
+              <li class="nav-item"><a href="course.html">Courses</a></li>
+              <li class="nav-item"><a href="job.html">Jobs</a></li>
+              <li class="nav-item active"><a href="project.html">Projects</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <!--====== PROJECT FORM ======-->
+  <section class="courses_area pt-120 pb-130">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <div class="about_content text-center wow fadeInUp">
+            <div class="section_title">
+              <h4 class="title">📂 Project Takeover & Works</h4>
+              <p>Submit your project requirements. Our team will review your request, provide a quote, and guide you through project execution.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center mt-50">
+        <div class="col-lg-8">
+          <form id="projectForm" class="course-form">
+            <!-- Project Type -->
+            <select name="projectType" required>
+              <option value="">-- Select Project Type --</option>
+              <option value="Web Development">Web Development</option>
+              <option value="Mobile App Development">Mobile App Development</option>
+              <option value="AI/ML Project">AI/ML Project</option>
+              <option value="IoT/Embedded">IoT / Embedded Systems</option>
+              <option value="Multimedia">Multimedia / Video Production</option>
+              <option value="Other">Other</option>
+            </select>
+
+            <!-- Reference ID -->
+            <input type="text" name="referenceId" placeholder="Reference ID (if any)" />
+
+            <!-- Expected Duration -->
+            <input type="text" name="duration" placeholder="Expected Duration (e.g. 2 months)" required />
+
+            <!-- Project Motive -->
+            <textarea name="motive" placeholder="Motive / Goal of the Project" required></textarea>
+
+            <!-- Contact Details -->
+            <input type="text" name="name" placeholder="Full Name" required />
+            <input type="email" name="email" placeholder="Email Address" required />
+            <input type="text" name="number" placeholder="Contact Number" required />
+
+            <!-- Payment (placeholder now) -->
+            <p><b>💳 Payment will be processed after confirmation.</b></p>
+
+            <button type="submit">Submit Project Request</button>
+          </form>
+          <p id="formMessage" class="form-message text-center mt-3"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--====== FOOTER ======-->
+  <section class="footer_area bg_cover" style="background-image: url(assets/images/kevin-bidwell.jpg)">
+    <div class="container">
+      <div class="footer_widget pt-80 pb-130">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="footer_about mt-50">
+              <a href="#"><img src="assets/images/THMAILE.png" alt="logo"></a>
+              <p>"We deliver professional project solutions tailored to your needs."</p>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="footer_link_wrapper d-flex flex-wrap">
+              <div class="footer_link mt-45">
+                <h4 class="footer_title">Company</h4>
+                <ul class="link">
+                  <li><a href="index.html">Home</a></li>
+                  <li><a href="about.html">About</a></li>
+                  <li><a href="service.html">Services</a></li>
+                  <li><a href="course.html">Courses</a></li>
+                  <li><a href="job.html">Jobs</a></li>
+                  <li><a href="project.html">Projects</a></li>
+                </ul>
+              </div>
+              <div class="footer_link mt-45">
+                <h4 class="footer_title">Support</h4>
+                <ul class="link">
+                  <li><a href="terms.html">Terms & Condition</a></li>
+                  <li><a href="privacy.html">Privacy</a></li>
+                  <li><a href="legal.html">Legal Terms</a></li>
+                </ul>
+              </div>
+              <div class="footer_link mt-45">
+                <h4 class="footer_title">Socials</h4>
+                <ul class="link">
+                  <li><a href="#">Facebook</a></li>
+                  <li><a href="#">Twitter</a></li>
+                  <li><a href="#">Instagram</a></li>
+                  <li><a href="#">LinkedIn</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--====== SCRIPTS ======-->
+  <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/wow.min.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <!-- Firebase Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBWcMwH3piYJ2qo_NDJUe1U_BFortwtPmA",
+      authDomain: "pedia-world.firebaseapp.com",
+      projectId: "pedia-world",
+      storageBucket: "pedia-world.firebasestorage.app",
+      messagingSenderId: "575755594344",
+      appId: "1:575755594344:web:7a32a7bd5edcd0cb48a9dd"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    document.getElementById("projectForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const form = e.target;
+      const data = {
+        projectType: form.projectType.value,
+        referenceId: form.referenceId.value,
+        duration: form.duration.value,
+        motive: form.motive.value,
+        name: form.name.value,
+        email: form.email.value,
+        number: form.number.value,
+        timestamp: new Date().toISOString()
+      };
+
+      push(ref(db, "projects"), data)
+        .then(() => {
+          form.reset();
+          document.getElementById("formMessage").textContent = "✅ Project request submitted successfully!";
+        })
+        .catch((err) => {
+          document.getElementById("formMessage").textContent = "❌ Error: " + err.message;
+        });
+    });
+  </script>
+</body>
+</html>

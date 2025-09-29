@@ -1,0 +1,124 @@
+/* LOgin Form */
+
+/* General Auth Page Style */
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.75)),
+              url('https://images.unsplash.com/photo-1535223289827-42f1e9919769?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80') 
+              no-repeat center center/cover;
+  font-family: Arial, sans-serif;
+}
+
+
+/* Auth Box */
+.auth-container {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 15px;
+  width: 350px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.auth-container h2 {
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.auth-container .subtitle {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+/* Form */
+.auth-form .form-group {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.auth-form label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 5px;
+  color: #444;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.auth-form input:focus {
+  border-color: #ff9d00;
+  box-shadow: 0 0 6px rgba(255,157,0,0.5);
+}
+
+/* Buttons */
+.btn-primary {
+  background: #ff9d00;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 100%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background: #e68900;
+}
+
+/* Switch link */
+.switch-link {
+  margin-top: 15px;
+  font-size: 0.85rem;
+}
+
+.switch-link a {
+  color: #ff9d00;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.switch-link a:hover {
+  text-decoration: underline;
+}
+
+/* Admin Login Specific */
+
+.admin-login-form .form-group {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.admin-login-form label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 5px;
+  color: #444;
+}
+
+.admin-login-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.admin-login-form input:focus {
+  border-color: #ff9d00;
+  box-shadow: 0 0 6px rgba(255,157,0,0.5);
+}

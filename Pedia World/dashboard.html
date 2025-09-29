@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard - Pedia World</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="auth-page">
+  <div class="auth-container">
+    <h2>Welcome to Your Dashboard</h2>
+    <p>You are successfully logged in 🎉</p>
+    <button class="btn-primary" onclick="logout()">Logout</button>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
+
+  <script>
+    // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyBWcMwH3piYJ2qo_NDJUe1U_BFortwtPmA",
+            authDomain: "pedia-world.firebaseapp.com",
+            projectId: "pedia-world",
+            storageBucket: "pedia-world.firebasestorage.app",
+            messagingSenderId: "575755594344",
+            appId: "1:575755594344:web:7a32a7bd5edcd0cb48a9dd",
+            measurementId: "G-DNXH7MWX6M"
+        };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // ✅ Check if user is logged in
+    auth.onAuthStateChanged(user => {
+      if (!user) {
+        window.location.href = "login.html"; // redirect if not logged in
+      }
+    });
+
+    // 🚪 Logout function
+    function logout() {
+      auth.signOut().then(() => {
+        window.location.href = "login.html";
+      });
+    }
+  </script>
+</body>
+</html>

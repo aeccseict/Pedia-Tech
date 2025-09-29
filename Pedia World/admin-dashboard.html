@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="admin-dashboard.css">
+  <script type="module">
+    // Import Firebase SDK
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, updateDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+
+    // Firebase Config
+    const firebaseConfig = {
+      apiKey: "AIzaSyBWcMwH3piYJ2qo_NDJUe1U_BFortwtPmA",
+      authDomain: "pedia-world.firebaseapp.com",
+      projectId: "pedia-world",
+      storageBucket: "pedia-world.firebasestorage.app",
+      messagingSenderId: "575755594344",
+      appId: "1:575755594344:web:7a32a7bd5edcd0cb48a9dd",
+      measurementId: "G-DNXH7MWX6M"
+    };
+    // Init Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // 🔹 Tab Switching
+    function openTab(tabName) {
+      document.querySelectorAll(".tab-content").forEach(sec => sec.style.display = "none");
+      document.getElementById(tabName).style.display = "block";
+    }
+    window.openTab = openTab;
+
+    /* ========== USERS ========== */
+    async function loadUsers() {
+      const usersTable = document.getElementById("usersTable");
+      usersTable.innerHTML = "";
+      const querySnapshot = await getDocs(collection(db, "users"));
+      querySnapshot.forEach((docSnap) => {
+        const data = docSnap.data();
+        usersTable.innerHTML += `
+          <tr>
+            <td>${data.name || "-"}</td>
+            <td>${data.email || "-"}</td>
+            <td><button onclick="deleteUser('${docSnap.id}')">Delete</button></td>
+          </tr>
+        `;
+      });
+    }
+    window.loadUsers = loadUsers;
+
+    async function deleteUser(id) {
+      await deleteDoc(doc(db, "users", id));
+      loadUsers();
+    }
+    window.deleteUser = deleteUser;
+
+    /* ========== COURSES ========== */
+    async function loadCourses() {
+      const table = document.getElementById("coursesTable");
+      table.innerHTML = "";
+      const snap = await getDocs(collection(db, "courses"));
+      snap.forEach(docSnap => {
+        const c = docSnap.data();
+        table.innerHTML += `
+          <tr>
+            <td>${c.course || "-"}</td>
+            <td>${c.user || "-"}</td>
+            <td>${c.status || "Pending"}</td>
+            <td>
+              <button onclick="updateCourse('${docSnap.id}','Approved')">Approve</button>
+              <button onclick="updateCourse('${docSnap.id}','Rejected')">Reject</button>
+            </td>
+          </tr>`;
+      });
+    }
+    window.loadCourses = loadCourses;
+
+    async function updateCourse(id, status) {
+      await updateDoc(doc(db, "courses", id), { status });
+      loadCourses();
+    }
+    window.updateCourse = updateCourse;
+
+    /* ========== JOBS ========== */
+    async function loadJobs() {
+      const table = document.getElementById("jobsTable");
+      table.innerHTML = "";
+      const snap = await getDocs(collection(db, "jobs"));
+      snap.forEach(docSnap => {
+        const j = docSnap.data();
+        table.innerHTML += `
+          <tr>
+            <td>${j.position || "-"}</td>
+            <td>${j.user || "-"}</td>
+            <td>${j.type || "-"}</td>
+            <td>${j.status || "Pending"}</td>
+            <td>
+              <button onclick="updateJob('${docSnap.id}','Accepted')">Accept</button>
+              <button onclick="updateJob('${docSnap.id}','Rejected')">Reject</button>
+            </td>
+          </tr>`;
+      });
+    }
+    window.loadJobs = loadJobs;
+
+    async function updateJob(id, status) {
+      await updateDoc(doc(db, "jobs", id), { status });
+      loadJobs();
+    }
+    window.updateJob = updateJob;
+
+    /* ========== PROJECTS ========== */
+    async function loadProjects() {
+      const table = document.getElementById("projectsTable");
+      table.innerHTML = "";
+      const snap = await getDocs(collection(db, "projects"));
+      snap.forEach(docSnap => {
+        const p = docSnap.data();
+        table.innerHTML += `
+          <tr>
+            <td>${p.type || "-"}</td>
+            <td>${p.referenceId || "-"}</td>
+            <td>${p.duration || "-"}</td>
+            <td>${p.user || "-"}</td>
+            <td>${p.status || "Pending"}</td>
+            <td>
+              <button onclick="updateProject('${docSnap.id}','Ongoing')">Mark Ongoing</button>
+              <button onclick="updateProject('${docSnap.id}','Completed')">Mark Completed</button>
+            </td>
+          </tr>`;
+      });
+    }
+    window.loadProjects = loadProjects;
+
+    async function updateProject(id, status) {
+      await updateDoc(doc(db, "projects", id), { status });
+      loadProjects();
+    }
+    window.updateProject = updateProject;
+
+    /* ========== HELP ========== */
+    async function loadHelp() {
+      const table = document.getElementById("helpTable");
+      table.innerHTML = "";
+      const snap = await getDocs(collection(db, "help"));
+      snap.forEach(docSnap => {
+        const h = docSnap.data();
+        table.innerHTML += `
+          <tr>
+            <td>${h.user || "-"}</td>
+            <td>${h.message || "-"}</td>
+            <td>${h.reply || "-"}</td>
+            <td><button onclick="replyHelp('${docSnap.id}')">Reply</button></td>
+          </tr>`;
+      });
+    }
+    window.loadHelp = loadHelp;
+
+    async function replyHelp(id) {
+      const reply = prompt("Enter reply:");
+      if (reply) {
+        await updateDoc(doc(db, "help", id), { reply });
+        loadHelp();
+      }
+    }
+    window.replyHelp = replyHelp;
+
+    /* ========== NOTIFICATIONS ========== */
+    async function sendNotification(e) {
+      e.preventDefault();
+      const message = document.getElementById("notifyMessage").value;
+      if (!message.trim()) return;
+      await addDoc(collection(db, "notifications"), { message, timestamp: Date.now() });
+      document.getElementById("notifyMessage").value = "";
+      alert("Notification sent!");
+    }
+    window.sendNotification = sendNotification;
+
+    /* ========== INITIAL LOAD ========== */
+    window.onload = () => {
+      openTab('Users');
+      loadUsers();
+      loadCourses();
+      loadJobs();
+      loadProjects();
+      loadHelp();
+    };
+  </script>
+</head>
+<body>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <h2>Admin</h2>
+      <ul>
+        <li><a href="#" onclick="openTab('Users')">Users</a></li>
+        <li><a href="#" onclick="openTab('Courses')">Courses</a></li>
+        <li><a href="#" onclick="openTab('Jobs')">Jobs</a></li>
+        <li><a href="#" onclick="openTab('Projects')">Projects</a></li>
+        <li><a href="#" onclick="openTab('Help')">Help</a></li>
+        <li><a href="#" onclick="openTab('Notifications')">Notifications</a></li>
+      </ul>
+    </aside>
+
+    <main class="content">
+      <!-- USERS -->
+      <section id="Users" class="tab-content">
+        <h2>Manage Users</h2>
+        <table border="1" width="100%">
+          <thead><tr><th>Name</th><th>Email</th><th>Action</th></tr></thead>
+          <tbody id="usersTable"></tbody>
+        </table>
+      </section>
+
+      <!-- COURSES -->
+      <section id="Courses" class="tab-content" style="display:none;">
+        <h2>Manage Courses</h2>
+        <table border="1" width="100%">
+          <thead><tr><th>Course</th><th>User</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody id="coursesTable"></tbody>
+        </table>
+      </section>
+
+      <!-- JOBS -->
+      <section id="Jobs" class="tab-content" style="display:none;">
+        <h2>Manage Jobs & Internships</h2>
+        <table border="1" width="100%">
+          <thead><tr><th>Position</th><th>User</th><th>Type</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody id="jobsTable"></tbody>
+        </table>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="Projects" class="tab-content" style="display:none;">
+        <h2>Manage Projects</h2>
+        <table border="1" width="100%">
+          <thead><tr><th>Type</th><th>Reference ID</th><th>Duration</th><th>User</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody id="projectsTable"></tbody>
+        </table>
+      </section>
+
+      <!-- HELP -->
+      <section id="Help" class="tab-content" style="display:none;">
+        <h2>Help & Support</h2>
+        <table border="1" width="100%">
+          <thead><tr><th>User</th><th>Message</th><th>Reply</th><th>Action</th></tr></thead>
+          <tbody id="helpTable"></tbody>
+        </table>
+      </section>
+
+      <!-- NOTIFICATIONS -->
+      <section id="Notifications" class="tab-content" style="display:none;">
+        <h2>Send Notifications</h2>
+        <form onsubmit="sendNotification(event)">
+          <textarea id="notifyMessage" placeholder="Write a message..." required></textarea>
+          <button type="submit">Send</button>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .dashboard {
+      display: flex;
+    }
+
+    .sidebar {
+      width: 220px;
+      background: #222;
+      color: #fff;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      margin: 15px 0;
+    }
+
+    .sidebar ul li a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .content {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    textarea {
+      width: 100%;
+      height: 80px;
+      margin: 10px 0;
+    }
+
+  </style>
+</body>
+</html>
